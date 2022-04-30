@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.sql.Time;
 import java.time.Duration;
 
 public class InstagramProfilePage {
@@ -19,6 +20,12 @@ public class InstagramProfilePage {
     WebElement subscribeButton;
 
     WebElement subscribedButton;
+
+    WebElement firstPost;
+
+    WebElement likeButton;
+
+    WebElement likeButtonPressed;
 
     private WebDriver driver = BrowserFactory.getDriver();
 
@@ -46,5 +53,22 @@ public class InstagramProfilePage {
             Assert.fail("Subscription failed");
         }
         Assert.assertTrue(subscribedButton.isDisplayed());
+    }
+
+    public void clickOnFirstPost(String profileName) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        try {
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("#react-root > section > main > div > header > section > div.XBGH5 > h2"), profileName));
+        }
+        catch (TimeoutException e) {
+            Assert.fail("Couldn't load profile page");
+        }
+        try {
+            firstPost = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#react-root > section > main > div > div._2z6nI > article > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1)")));
+        }
+        catch (TimeoutException e) {
+            Assert.fail("Couldn't find first post");
+        }
+        firstPost.click();
     }
 }

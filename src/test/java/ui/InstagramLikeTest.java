@@ -7,20 +7,18 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class InstagramSubscribeTest {
+public class InstagramLikeTest {
 
-    private InstagramBO instagramBO;
-
+    InstagramBO instagramBO;
 
 
     @DataProvider
-    private Object[][] subscribeDP() {
+    private Object[][] likeTestDP() {
         return new Object[][] {
                 {"zelenskiy_official"},
                 {"link_huink"},
                 {"rterdogan"},
-                {"pushkin_ph"},
-                {"lelyamt"}
+                {"pushkin_ph"}
         };
     }
 
@@ -34,18 +32,21 @@ public class InstagramSubscribeTest {
 
     }
 
-    @Test(dataProvider = "subscribeDP")
-    public void subscribeTest(String profileName) {
+    @Test(dataProvider = "likeTestDP")
+    public void likeTest(String profileName) {
         instagramBO
                 .searchForProfile(profileName)
                 .clickOnFirstProfile()
-                .subscribe()
-                .verifySubscription();
-    }   
+                .clickOnFirstPost()
+                .like()
+                .verifyLike()
+                .closePost();
+    }
 
     @AfterTest
     public void closeSession() {
 //        BrowserFactory.getDriver().close();
 //        BrowserFactory.getDriver().quit();
     }
+
 }

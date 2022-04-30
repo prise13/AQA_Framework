@@ -2,6 +2,7 @@ package bo;
 
 import po.InstagramLoginPage;
 import po.InstagramMainPage;
+import po.InstagramPostPage;
 import po.InstagramProfilePage;
 
 public class InstagramBO {
@@ -9,11 +10,14 @@ public class InstagramBO {
     private final InstagramLoginPage instagramLoginPage;
     private final InstagramMainPage instagramMainPage;
     private final InstagramProfilePage instagramProfilePage;
+    private final InstagramPostPage instagramPostPage;
+    private String profileName;
 
     public InstagramBO() {
         instagramLoginPage = new InstagramLoginPage();
         instagramMainPage = new InstagramMainPage();
         instagramProfilePage = new InstagramProfilePage();
+        instagramPostPage = new InstagramPostPage();
 
     }
 
@@ -31,6 +35,7 @@ public class InstagramBO {
     }
     public InstagramBO searchForProfile(String profileName) {
         instagramMainPage.searchProfile(profileName);
+        this.profileName = profileName;
         return this;
     }
     public InstagramBO clickOnFirstProfile() {
@@ -45,4 +50,21 @@ public class InstagramBO {
         instagramProfilePage.verifySubscription();
         return this;
     }
+    public InstagramBO clickOnFirstPost() {
+        instagramProfilePage.clickOnFirstPost(this.profileName);
+        return this;
+    }
+    public InstagramBO like() {
+        instagramPostPage.like();
+        return this;
+    }
+    public InstagramBO verifyLike() {
+        instagramPostPage.verifyLike();
+        return this;
+    }
+    public InstagramBO closePost() {
+        instagramPostPage.closePost();
+        return this;
+    }
 }
+
