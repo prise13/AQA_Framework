@@ -55,7 +55,7 @@ public class InstagramMainPage {
     public void searchProfile(String profileName) {
         WebDriverWait searchInputWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         try {
-            WebElement element = searchInputWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"react-root\"]/section/nav/div[2]/div/div/div[2]/input")));
+            WebElement element = searchInputWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#react-root > section > nav > div._8MQSO.Cx7Bp > div > div > div.QY4Ed.P0xOK > input")));
         }
         catch (TimeoutException e) {
             Assert.fail("Failed to load page");

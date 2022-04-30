@@ -25,10 +25,9 @@ public class InstagramMessagePage {
         driver = BrowserFactory.getDriver();
     }
 
-    public void sendMessage(String profileName, String message) {
+    public void sendMessage(String message) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         try {
-            wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("#react-root > section > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5._4EzTm > div > div > div.DPiy6.qF0y9.Igw0E.IwRSH.eGOV_.acqo5.vwCYk > div.CpMFL > div > div > div.m7ETg > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5.ui_ht.n4cjz > button > div > div > div"), profileName));
             messageInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#react-root > section > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5._4EzTm > div > div > div.DPiy6.qF0y9.Igw0E.IwRSH.eGOV_.acqo5.vwCYk > div.uueGX > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5._4EzTm > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5.vwCYk.ItkAi > textarea")));
         }
         catch (TimeoutException e) {

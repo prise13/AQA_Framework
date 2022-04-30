@@ -12,9 +12,9 @@ public class InstagramMessageTest {
 
 
     @DataProvider
-    public Object[][] commentTestDP() {
+    public Object[][] messageTestDP() {
         return new Object[][] {
-                {"pushkin_ph", "Кльово!"},
+                {"pushkin_ph", "Тест 7000"},
                 {"informationpersonal", "Вау!"}
         };
     }
@@ -35,7 +35,7 @@ public class InstagramMessageTest {
                 .clickOnFirstProfile()
                 .clickSendMessageButton()
                 .declineNotifications()
-                .sendMessage("Привіт!");
+                .sendMessage("пачічі");
     }
 
 

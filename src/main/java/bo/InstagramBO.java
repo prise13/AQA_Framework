@@ -73,7 +73,7 @@ public class InstagramBO {
         return this;
     }
     public InstagramBO sendMessage(String message) {
-        instagramMessagePage.sendMessage(this.profileName, message);
+        instagramMessagePage.sendMessage(message);
         return this;
     }
     public InstagramBO declineNotifications() {
