@@ -1,9 +1,6 @@
 package bo;
 
-import po.InstagramLoginPage;
-import po.InstagramMainPage;
-import po.InstagramPostPage;
-import po.InstagramProfilePage;
+import po.*;
 
 public class InstagramBO {
 
@@ -11,6 +8,7 @@ public class InstagramBO {
     private final InstagramMainPage instagramMainPage;
     private final InstagramProfilePage instagramProfilePage;
     private final InstagramPostPage instagramPostPage;
+    private final InstagramMessagePage instagramMessagePage;
     private String profileName;
 
     public InstagramBO() {
@@ -18,7 +16,7 @@ public class InstagramBO {
         instagramMainPage = new InstagramMainPage();
         instagramProfilePage = new InstagramProfilePage();
         instagramPostPage = new InstagramPostPage();
-
+        instagramMessagePage = new InstagramMessagePage();
     }
 
     public InstagramBO openLoginPage() {
@@ -64,6 +62,22 @@ public class InstagramBO {
     }
     public InstagramBO closePost() {
         instagramPostPage.closePost();
+        return this;
+    }
+    public InstagramBO leaveComment(String message) {
+        instagramPostPage.leaveComment(message);
+        return this;
+    }
+    public InstagramBO clickSendMessageButton() {
+        instagramProfilePage.clickSendMessageButton();
+        return this;
+    }
+    public InstagramBO sendMessage(String message) {
+        instagramMessagePage.sendMessage(this.profileName, message);
+        return this;
+    }
+    public InstagramBO declineNotifications() {
+        instagramMessagePage.acceptShitModal();
         return this;
     }
 }

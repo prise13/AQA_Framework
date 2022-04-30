@@ -23,9 +23,7 @@ public class InstagramProfilePage {
 
     WebElement firstPost;
 
-    WebElement likeButton;
-
-    WebElement likeButtonPressed;
+    WebElement sendMessageButton;
 
     private WebDriver driver = BrowserFactory.getDriver();
 
@@ -70,5 +68,16 @@ public class InstagramProfilePage {
             Assert.fail("Couldn't find first post");
         }
         firstPost.click();
+    }
+
+    public void clickSendMessageButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        try {
+            sendMessageButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#react-root > section > main > div > header > section > div.XBGH5 > div.qF0y9.Igw0E.IwRSH.eGOV_.ybXk5._4EzTm.bPdm3 > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5.vwCYk.soMvl.i0EQd > button")));
+        }
+        catch (TimeoutException e) {
+            Assert.fail("Couldn't press button");
+        }
+        sendMessageButton.click();
     }
 }

@@ -1,5 +1,6 @@
 package po;
 
+import decorator.Input;
 import factory.BrowserFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -19,6 +20,10 @@ public class InstagramPostPage {
     WebElement likeButtonPressed;
 
     WebElement closeButton;
+
+    WebElement commentInput;
+
+    WebElement submitButton;
 
     public InstagramPostPage() {
         driver = BrowserFactory.getDriver();
@@ -56,5 +61,27 @@ public class InstagramPostPage {
             Assert.fail("Failed to close post");
         }
         closeButton.click();
+    }
+
+    public void leaveComment(String message) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        try {
+            commentInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > div.RnEpo._Yhr4 > div.pbNvD.QZZGH.bW6vo > div > article > div > div.HP0qD > div > div > div.eo2As > section.sH9wk._JgwE > div > form > textarea")));
+        }
+        catch (TimeoutException e) {
+            Assert.fail("Failed to load textarea");
+        }
+        commentInput.click();
+        commentInput = driver.findElement(By.cssSelector("body > div.RnEpo._Yhr4 > div.pbNvD.QZZGH.bW6vo > div > article > div > div.HP0qD > div > div > div.eo2As > section.sH9wk._JgwE > div > form > textarea"));
+        commentInput.sendKeys(message);
+        try {
+            submitButton = driver.findElement(By.cssSelector("body > div.RnEpo._Yhr4 > div.pbNvD.QZZGH.bW6vo > div > article > div > div.HP0qD > div > div > div.eo2As > section.sH9wk._JgwE > div > form > button"));
+            wait.until(ExpectedConditions.elementToBeClickable(submitButton));
+        }
+        catch (TimeoutException e) {
+            Assert.fail("Failed to comment");
+        }
+        submitButton.click();
+        Assert.assertTrue(true);
     }
 }
