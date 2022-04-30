@@ -26,7 +26,7 @@ public class InstagramCommentTest {
         instagramBO = new InstagramBO();
         instagramBO
                 .openLoginPage()
-                .login("aqatest13", "AQAAuthenticationTest");
+                .login("aqatest12", "AQAAuthenticationTest");
     }
 
     @Test(dataProvider = "commentTestDP")

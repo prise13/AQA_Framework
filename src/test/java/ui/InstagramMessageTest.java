@@ -25,7 +25,7 @@ public class InstagramMessageTest {
         instagramBO = new InstagramBO();
         instagramBO
                 .openLoginPage()
-                .login("aqatest13", "AQAAuthenticationTest");
+                .login("aqatest12", "AQAAuthenticationTest");
     }
 
     @Test
@@ -35,7 +35,7 @@ public class InstagramMessageTest {
                 .clickOnFirstProfile()
                 .clickSendMessageButton()
                 .declineNotifications()
-                .sendMessage("пачічі");
+                .sendMessage("Як справи?");
     }
 
 

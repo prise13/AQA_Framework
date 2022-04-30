@@ -28,7 +28,7 @@ public class InstagramLikeTest {
         instagramBO = new InstagramBO();
         instagramBO
                 .openLoginPage()
-                .login("aqatest13", "AQAAuthenticationTest");
+                .login("aqatest12", "AQAAuthenticationTest");
 
     }
 
