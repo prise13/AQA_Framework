@@ -1,6 +1,7 @@
 package client;
 
 import constants.Constants;
+import jdk.jfr.Frequency;
 
 import java.io.IOException;
 import java.net.URI;
@@ -84,6 +85,61 @@ public class TrelloHTTPClient {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(String.format("https://api.trello.com/1/organizations/%s/boards?key=%s&token=%s", idOrganization, API_KEY, API_TOKEN)))
                 .GET()
+                .build();
+
+        HttpClient client = HttpClient.newHttpClient();
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public HttpResponse<String> getBoardLists(String idBoard) throws URISyntaxException, IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(String.format("https://api.trello.com/1/boards/%s/lists?key=%s&token=%s", idBoard, API_KEY, API_TOKEN)))
+                .GET()
+                .build();
+
+        HttpClient client = HttpClient.newHttpClient();
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public HttpResponse<String> createCard(String idList, String name) throws URISyntaxException, IOException, InterruptedException {
+        String requestBody = String.format("""
+                {
+                    "key":"%s",
+                    "token":"%s",
+                    "idList":"%s",
+                    "name":"%s"
+                }""", API_KEY, API_TOKEN, idList, name);
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI("https://api.trello.com/1/cards"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody, StandardCharsets.UTF_8))
+                .build();
+
+        HttpClient client = HttpClient.newHttpClient();
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public HttpResponse<String> getListCards(String idList) throws URISyntaxException, IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(String.format("https://api.trello.com/1/lists/%s/cards?key=%s&token=%s", idList, API_KEY, API_TOKEN)))
+                .GET()
+                .build();
+
+        HttpClient client = HttpClient.newHttpClient();
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public HttpResponse<String> updateCard(String idCard, String name) throws URISyntaxException, IOException, InterruptedException {
+        String requestBody = String.format("""
+                {
+                    "key":"%s",
+                    "token":"%s",
+                    "name":"%s"
+                }""", API_KEY, API_TOKEN, name);
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(String.format("https://api.trello.com/1/cards/%s", idCard)))
+                .header("Content-Type", "application/json")
+                .PUT(HttpRequest.BodyPublishers.ofString(requestBody, StandardCharsets.UTF_8))
                 .build();
 
         HttpClient client = HttpClient.newHttpClient();

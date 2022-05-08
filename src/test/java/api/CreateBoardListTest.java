@@ -1,7 +1,6 @@
 package api;
 
 import api_model.CreateListResponse;
-import api_model.GetOrganizationBoardsResponse;
 import client.TrelloHTTPClient;
 import constants.Constants;
 import mapper.ResponseMapper;
@@ -12,8 +11,7 @@ import service.TrelloService;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class CreateBoardListTest {
 

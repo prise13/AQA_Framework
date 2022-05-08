@@ -1,10 +1,8 @@
 package mapper;
 
-import api_model.CreateBoardResponse;
-import api_model.CreateListResponse;
-import api_model.CreateOrganizationResponse;
-import api_model.GetOrganizationBoardsResponse;
+import api_model.*;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -59,6 +57,44 @@ public class ResponseMapper {
             e.printStackTrace();
         }
         return createListResponse;
+    }
+
+    public static List<GetBoardListsResponse> boardListsResponseToObject(HttpResponse<String> response) {
+        List<GetBoardListsResponse> getBoardListsResponses = null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            getBoardListsResponses = objectMapper.readValue(response.body(), new TypeReference<List<GetBoardListsResponse>>(){});
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return getBoardListsResponses;
+    }
+
+    public static List<GetListCardsResponse> listCardsResponseToObject(HttpResponse<String> response) {
+        List<GetListCardsResponse> getListCardsResponses = null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        try {
+            getListCardsResponses = objectMapper.readValue(response.body(), new TypeReference<List<GetListCardsResponse>>(){});
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return getListCardsResponses;
+    }
+
+    public static UpdateCardResponse updateCardResponseToObject(HttpResponse<String> response) {
+        UpdateCardResponse updateCardResponse = null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        try {
+            updateCardResponse = objectMapper.readValue(response.body(), UpdateCardResponse.class);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return updateCardResponse;
     }
 
 }
