@@ -8,7 +8,6 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import service.TrelloService;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 
