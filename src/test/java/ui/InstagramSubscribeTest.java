@@ -17,10 +17,9 @@ public class InstagramSubscribeTest {
     private Object[][] subscribeDP() {
         return new Object[][] {
                 {"zelenskiy_official"},
-                {"link_huink"},
                 {"rterdogan"},
-                {"pushkin_ph"},
-                {"lelyamt"}
+                {"_sh.mel_"},
+                {"informationpersonal"}
         };
     }
 
@@ -45,7 +44,7 @@ public class InstagramSubscribeTest {
 
     @AfterTest
     public void closeSession() {
-//        BrowserFactory.getDriver().close();
-//        BrowserFactory.getDriver().quit();
+        BrowserFactory.getDriver().close();
+        BrowserFactory.getDriver().quit();
     }
 }

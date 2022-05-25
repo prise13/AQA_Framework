@@ -15,7 +15,7 @@ public class InstagramCommentTest {
     @DataProvider
     public Object[][] commentTestDP() {
         return new Object[][] {
-                {"pushkin_ph", "Кльово!"},
+                {"sami_sultanova", "Кльово!"},
                 {"informationpersonal", "Вау!"}
         };
     }

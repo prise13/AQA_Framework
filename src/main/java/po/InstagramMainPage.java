@@ -61,7 +61,7 @@ public class InstagramMainPage {
             Assert.fail("Failed to load page");
         }
         searchInput.fillWith(profileName);
-        WebDriverWait searchBlockWait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        WebDriverWait searchBlockWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         try {
             searchList = searchBlockWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#react-root > section > nav > div._8MQSO.Cx7Bp > div > div > div.QY4Ed.P0xOK > div.yPP5B > div > div._01UL2 > div")));
             this.profileName = profileName;

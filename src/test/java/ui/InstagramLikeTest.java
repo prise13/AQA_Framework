@@ -16,9 +16,9 @@ public class InstagramLikeTest {
     private Object[][] likeTestDP() {
         return new Object[][] {
                 {"zelenskiy_official"},
-                {"link_huink"},
                 {"rterdogan"},
-                {"pushkin_ph"}
+                {"_sh.mel_"},
+                {"informationpersonal"}
         };
     }
 
@@ -45,8 +45,8 @@ public class InstagramLikeTest {
 
     @AfterTest
     public void closeSession() {
-//        BrowserFactory.getDriver().close();
-//        BrowserFactory.getDriver().quit();
+        BrowserFactory.getDriver().close();
+        BrowserFactory.getDriver().quit();
     }
 
 }

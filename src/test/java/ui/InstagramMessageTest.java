@@ -11,13 +11,13 @@ public class InstagramMessageTest {
     private InstagramBO instagramBO;
 
 
-    @DataProvider
-    public Object[][] messageTestDP() {
-        return new Object[][] {
-                {"pushkin_ph", "Тест 7000"},
-                {"informationpersonal", "Вау!"}
-        };
-    }
+//    @DataProvider
+//    public Object[][] messageTestDP() {
+//        return new Object[][] {
+//                {"_stvorena_z_tsukru_", "Тест 7000"},
+//                {"informationpersonal", "Вау!"}
+//        };
+//    }
 
     @BeforeTest
     public void init() {
