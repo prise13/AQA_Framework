@@ -40,7 +40,7 @@ public class InstagramMessageTest {
 
     @AfterTest
     public void closeSession() {
-//        BrowserFactory.getDriver().close();
-//        BrowserFactory.getDriver().quit();
+        BrowserFactory.getDriver().close();
+        BrowserFactory.getDriver().quit();
     }
 }

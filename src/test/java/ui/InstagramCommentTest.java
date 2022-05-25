@@ -40,7 +40,7 @@ public class InstagramCommentTest {
 
     @AfterTest
     public void closeSession() {
-//        BrowserFactory.getDriver().close();
-//        BrowserFactory.getDriver().quit();
+        BrowserFactory.getDriver().close();
+        BrowserFactory.getDriver().quit();
     }
 }

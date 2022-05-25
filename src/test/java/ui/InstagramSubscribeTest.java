@@ -16,7 +16,6 @@ public class InstagramSubscribeTest {
     private Object[][] subscribeDP() {
         return new Object[][] {
                 {"zelenskiy_official"},
-                {"rterdogan"},
                 {"_sh.mel_"},
                 {"informationpersonal"}
         };
