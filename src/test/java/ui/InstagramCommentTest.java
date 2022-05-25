@@ -2,11 +2,10 @@ package ui;
 
 import bo.InstagramBO;
 import factory.BrowserFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import listener.AllureListener;
+import org.testng.annotations.*;
 
+@Listeners({AllureListener.class})
 public class InstagramCommentTest {
 
     private InstagramBO instagramBO;
