@@ -11,6 +11,8 @@ public class InstagramCommentTest {
     private InstagramBO instagramBO;
 
 
+    // implement Hibernate DP
+
     @DataProvider
     public Object[][] commentTestDP() {
         return new Object[][] {

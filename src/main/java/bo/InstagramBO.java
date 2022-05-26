@@ -4,6 +4,8 @@ import po.*;
 
 public class InstagramBO {
 
+    // Переробити
+
     private final InstagramLoginPage instagramLoginPage;
     private final InstagramMainPage instagramMainPage;
     private final InstagramProfilePage instagramProfilePage;

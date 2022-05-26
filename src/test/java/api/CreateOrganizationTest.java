@@ -15,9 +15,11 @@ public class CreateOrganizationTest {
     @DataProvider
     public Object[][] createOrganizationDP() {
         return new Object[][] {
-                {"TestOrganization12","testorganizationlink2323", "descriptions"}
+                {"TestOrganization132","testorganizationlink2323", "descriptions"}
         };
     }
+
+    // End to end flow
 
     @Test(dataProvider = "createOrganizationDP")
     public void createOrganizationTest(String organizationName, String linkName, String description) throws InterruptedException, IOException, URISyntaxException {
