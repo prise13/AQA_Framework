@@ -2,6 +2,7 @@ package ui;
 
 import bo.InstagramBO;
 import factory.BrowserFactory;
+import hibernate.HibernateService;
 import listener.AllureListener;
 import org.testng.annotations.*;
 
@@ -11,11 +12,7 @@ public class InstagramLoginTest {
 
     @DataProvider
     public Object[][] instagramLoginDP() {
-        return new Object[][] {
-                {"123123","user21312"},
-                {"123123123","213123123123"},
-                {"aqatest12", "AQAAuthenticationTest"}
-        };
+        return HibernateService.getLoginTestData();
     }
 
 
