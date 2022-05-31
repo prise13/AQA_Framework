@@ -21,8 +21,8 @@ public class InstagramMessagePage {
 
     private WebElement acceptShitButton;
 
-    public InstagramMessagePage() {
-        driver = BrowserFactory.getDriver();
+    public InstagramMessagePage(WebDriver driver) {
+        this.driver = driver;
     }
 
     public void sendMessage(String message) {

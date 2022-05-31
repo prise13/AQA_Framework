@@ -24,9 +24,10 @@ public class InstagramProfilePage {
 
     WebElement sendMessageButton;
 
-    private WebDriver driver = BrowserFactory.getDriver();
+    private WebDriver driver;
 
-    public InstagramProfilePage() {
+    public InstagramProfilePage(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(new InstagramFieldDecorator(driver), this);
     }
 

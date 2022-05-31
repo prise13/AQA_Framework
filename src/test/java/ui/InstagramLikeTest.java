@@ -21,10 +21,10 @@ public class InstagramLikeTest {
         };
     }
 
-    @BeforeTest
+    @BeforeClass
     public void initAndLogin() {
-        BrowserFactory.initDriver("chrome");
-        instagramBO = new InstagramBO();
+        BrowserFactory.initDriver(BrowserFactory.Browsers.CHROME);
+        this.instagramBO = new InstagramBO(BrowserFactory.getDriver());
         instagramBO
                 .openLoginPage()
                 .login("aqatest12", "AQAAuthenticationTest");
@@ -42,10 +42,9 @@ public class InstagramLikeTest {
                 .closePost();
     }
 
-    @AfterTest
+    @AfterClass
     public void closeSession() {
-        BrowserFactory.getDriver().close();
-        BrowserFactory.getDriver().quit();
+        BrowserFactory.closeDriver();
     }
 
 }

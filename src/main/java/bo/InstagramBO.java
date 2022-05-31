@@ -1,5 +1,6 @@
 package bo;
 
+import org.openqa.selenium.WebDriver;
 import po.*;
 
 public class InstagramBO {
@@ -11,14 +12,16 @@ public class InstagramBO {
     private final InstagramProfilePage instagramProfilePage;
     private final InstagramPostPage instagramPostPage;
     private final InstagramMessagePage instagramMessagePage;
+    private final WebDriver driver;
     private String profileName;
 
-    public InstagramBO() {
-        instagramLoginPage = new InstagramLoginPage();
-        instagramMainPage = new InstagramMainPage();
-        instagramProfilePage = new InstagramProfilePage();
-        instagramPostPage = new InstagramPostPage();
-        instagramMessagePage = new InstagramMessagePage();
+    public InstagramBO(WebDriver driver) {
+        this.driver = driver;
+        instagramLoginPage = new InstagramLoginPage(driver);
+        instagramMainPage = new InstagramMainPage(driver);
+        instagramProfilePage = new InstagramProfilePage(driver);
+        instagramPostPage = new InstagramPostPage(driver);
+        instagramMessagePage = new InstagramMessagePage(driver);
     }
 
     public InstagramBO openLoginPage() {

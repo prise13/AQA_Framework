@@ -9,6 +9,8 @@ import org.testng.annotations.*;
 @Listeners({AllureListener.class})
 public class InstagramLoginTest {
 
+    private InstagramBO instagramBO;
+
 
     @DataProvider
     public Object[][] instagramLoginDP() {
@@ -16,25 +18,23 @@ public class InstagramLoginTest {
     }
 
 
-    @BeforeTest
-    public void init() {
-        BrowserFactory.initDriver("chrome");
+    @BeforeClass
+    public void initDriver() {
+        BrowserFactory.initDriver(BrowserFactory.Browsers.CHROME);
+        this.instagramBO = new InstagramBO(BrowserFactory.getDriver());
     }
 
 
     @Test(dataProvider = "instagramLoginDP")
     public void loginTest(String login, String password) {
-        InstagramBO instagramBO = new InstagramBO();
         instagramBO
                 .openLoginPage()
                 .login(login, password)
                 .verifyMainPage();
     }
 
-
-    @AfterTest
-    public void closeSession() {
-        BrowserFactory.getDriver().close();
-        BrowserFactory.getDriver().quit();
+    @AfterClass
+    public void closeBrowser() {
+        BrowserFactory.closeDriver();
     }
 }

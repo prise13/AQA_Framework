@@ -25,8 +25,8 @@ public class InstagramPostPage {
 
     WebElement submitButton;
 
-    public InstagramPostPage() {
-        driver = BrowserFactory.getDriver();
+    public InstagramPostPage(WebDriver driver) {
+        this.driver = driver;
     }
 
 

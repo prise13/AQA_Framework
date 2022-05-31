@@ -29,8 +29,8 @@ public class InstagramLoginPage {
     @FindBy(xpath = "//*[@id=\"loginForm\"]/div/div[3]/button")
     private Button submitButton;
 
-    public InstagramLoginPage() {
-        this.driver = BrowserFactory.getDriver();
+    public InstagramLoginPage(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(new InstagramFieldDecorator(driver), this);
     }
 

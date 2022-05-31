@@ -22,8 +22,8 @@ public class InstagramMainPage {
 
     private final WebDriver driver;
 
-    public InstagramMainPage() {
-        driver = BrowserFactory.getDriver();
+    public InstagramMainPage(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(new InstagramFieldDecorator(driver), this);
     }
 
@@ -46,7 +46,7 @@ public class InstagramMainPage {
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"react-root\"]/section/nav/div[2]/div/div/div[3]/div/div[6]")));
         }
         catch (TimeoutException e) {
-            Assert.fail("Failed to login");
+            Assert.fail("Failed to login"); 
         }
         Assert.assertTrue(profileButton.isActive());
     }

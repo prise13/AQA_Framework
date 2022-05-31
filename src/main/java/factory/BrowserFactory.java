@@ -6,30 +6,48 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-// To do: Перевикористовувати
 public class BrowserFactory {
 
-    private static WebDriver instance;
+    private static final ThreadLocal<WebDriver> DRIVER = new ThreadLocal<>();
 
     public static WebDriver getDriver() {
-        if (instance == null) {
-            throw new RuntimeException("Driver is not initializated, try calling initDriver function before getting driver!");
+        if (DRIVER.get() == null) {
+            throw new RuntimeException("Driver wasn't initialized");
         }
-        return instance;
+        return DRIVER.get();
+    }
+
+    public enum Browsers {
+        CHROME {
+            public String toString() {
+                return "chrome";
+            }
+        },
+        FIREFOX {
+            public String toString() {
+                return "firefox";
+            }
+        }
     }
 
 
-    public static void initDriver(String driverName) {
-        switch (driverName) {
-            case ("chrome") -> {
+    public static void initDriver(Browsers browsers) {
+        switch (browsers) {
+            case CHROME -> {
                 ChromeDriverManager.getInstance().setup();
-                instance = new ChromeDriver();
+                DRIVER.set(new ChromeDriver());
             }
-            case ("firefox") -> {
+            case FIREFOX -> {
                 FirefoxDriverManager.getInstance().setup();
-                instance = new FirefoxDriver();
+                DRIVER.set(new FirefoxDriver());
             }
-            default -> throw new RuntimeException("Wrong driver name, currently supported are 'chrome' and 'firefox' drivers!");
+            default -> throw new RuntimeException("Wrong driver name, currently supported are 'chrome' and 'edge' drivers!");
         }
+    }
+
+
+    public static void closeDriver() {
+        DRIVER.get().quit();
+        DRIVER.remove();
     }
 }

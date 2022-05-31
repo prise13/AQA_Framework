@@ -11,7 +11,6 @@ public class InstagramSubscribeTest {
     private InstagramBO instagramBO;
 
 
-
     @DataProvider
     private Object[][] subscribeDP() {
         return new Object[][] {
@@ -21,10 +20,11 @@ public class InstagramSubscribeTest {
         };
     }
 
-    @BeforeTest
+
+    @BeforeClass
     public void initAndLogin() {
-        BrowserFactory.initDriver("chrome");
-        instagramBO = new InstagramBO();
+        BrowserFactory.initDriver(BrowserFactory.Browsers.CHROME);
+        this.instagramBO = new InstagramBO(BrowserFactory.getDriver());
         instagramBO
                 .openLoginPage()
                 .login("aqatest12", "AQAAuthenticationTest");
@@ -38,11 +38,10 @@ public class InstagramSubscribeTest {
                 .clickOnFirstProfile()
                 .subscribe()
                 .verifySubscription();
-    }   
+    }
 
-    @AfterTest
-    public void closeSession() {
-        BrowserFactory.getDriver().close();
-        BrowserFactory.getDriver().quit();
+    @AfterClass
+    public void closeBrowser() {
+        BrowserFactory.closeDriver();
     }
 }
