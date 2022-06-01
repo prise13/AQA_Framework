@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import tools.Lang;
 
 import java.sql.Time;
 import java.time.Duration;
@@ -30,7 +31,8 @@ public class InstagramMainPage {
     @FindBy(xpath = "//*[@id=\"react-root\"]/section/nav/div[2]/div/div/div[3]/div/div[6]")
     Button profileButton;
 
-    @FindBy(css = "#react-root > section > nav > div._8MQSO.Cx7Bp > div > div > div.QY4Ed.P0xOK > input")
+
+    @FindBy(xpath = "//input[contains(@aria-label, \"Ввод поискового запроса\")]")
     Input searchInput;
 
     private String profileName;
@@ -38,6 +40,10 @@ public class InstagramMainPage {
     WebElement searchList;
 
     List<WebElement> profilesList;
+
+    WebElement logo;
+
+    WebElement declineButton;
 
     // verifies if transition to main page was successful
     public void verifyMainPage() {
@@ -51,11 +57,33 @@ public class InstagramMainPage {
         Assert.assertTrue(profileButton.isActive());
     }
 
+    public void clickOnLogo() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        try {
+                this.logo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"react-root\"]/section/nav/div[2]/div/div/div[1]/a")));
+        }
+        catch (TimeoutException e) {
+            Assert.fail("Failed to click on logo");
+        }
+        logo.click();
+    }
+
+    public void declineNotifications() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        try {
+            this.declineButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button._a9--._a9_1")));
+        }
+        catch (TimeoutException e) {
+            System.out.println("Notifications are already declined");
+        }
+        declineButton.click();
+    }
+
     // fills search input with specified profile name
-    public void searchProfile(String profileName) {
+    public void     searchProfile(String profileName) {
         WebDriverWait searchInputWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         try {
-            WebElement element = searchInputWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#react-root > section > nav > div._8MQSO.Cx7Bp > div > div > div.QY4Ed.P0xOK > input")));
+            WebElement element = searchInputWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@aria-label, \"%s\")]".formatted(Lang.SEARCH_RU))));
         }
         catch (TimeoutException e) {
             Assert.fail("Failed to load page");
@@ -63,7 +91,8 @@ public class InstagramMainPage {
         searchInput.fillWith(profileName);
         WebDriverWait searchBlockWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         try {
-            searchList = searchBlockWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#react-root > section > nav > div._8MQSO.Cx7Bp > div > div > div.QY4Ed.P0xOK > div.yPP5B > div > div._01UL2 > div")));
+            // searchList = searchBlockWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("_abnx")));
+            searchList = searchBlockWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@role, \"none\")]/..")));
             this.profileName = profileName;
         }
         catch (TimeoutException e) {
@@ -82,6 +111,13 @@ public class InstagramMainPage {
         }
 
         if (profilesList != null && profilesList.size() > 0) {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(profilesList.get(0)));
+            }
+            catch (TimeoutException e) {
+                System.out.println("Couldn't click on profile");
+            }
             profilesList.get(0).click();
         }
         else {

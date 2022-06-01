@@ -41,12 +41,19 @@ public class InstagramBO {
         this.profileName = profileName;
         return this;
     }
+
+    public InstagramBO prepareToTest() {
+        instagramMainPage.clickOnLogo();
+        instagramMainPage.declineNotifications();
+        return this;
+    }
+
     public InstagramBO clickOnFirstProfile() {
         instagramMainPage.clickOnProfile();
         return this;
     }
     public InstagramBO subscribe() {
-        instagramProfilePage.subscribe();
+        instagramProfilePage.subscribe(profileName);
         return this;
     }
     public InstagramBO verifySubscription() {

@@ -1,7 +1,6 @@
 package factory;
 
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
-import io.github.bonigarcia.wdm.managers.FirefoxDriverManager;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -34,15 +33,19 @@ public class BrowserFactory {
     public static void initDriver(Browsers browsers) {
         switch (browsers) {
             case CHROME -> {
-                ChromeDriverManager.getInstance().setup();
+                WebDriverManager.chromedriver().setup();
                 DRIVER.set(new ChromeDriver());
             }
             case FIREFOX -> {
-                FirefoxDriverManager.getInstance().setup();
+                WebDriverManager.firefoxdriver().setup();
                 DRIVER.set(new FirefoxDriver());
             }
             default -> throw new RuntimeException("Wrong driver name, currently supported are 'chrome' and 'edge' drivers!");
         }
+    }
+
+    public static void setFullScreen() {
+        DRIVER.get().manage().window().maximize();
     }
 
 

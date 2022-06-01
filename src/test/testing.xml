@@ -3,9 +3,9 @@
         <classes>
             <class name="ui.InstagramLoginTest" />
             <class name="ui.InstagramSubscribeTest" />
-            <class name="ui.InstagramLikeTest"/>
-            <class name="ui.InstagramCommentTest"/>
-            <class name="ui.InstagramMessageTest"/>
+<!--            <class name="ui.InstagramLikeTest"/>-->
+<!--            <class name="ui.InstagramCommentTest"/>-->
+<!--            <class name="ui.InstagramMessageTest"/>-->
         </classes>
     </test>
 </suite>

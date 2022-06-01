@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import tools.Lang;
 
 import java.time.Duration;
 
@@ -31,10 +32,16 @@ public class InstagramProfilePage {
         PageFactory.initElements(new InstagramFieldDecorator(driver), this);
     }
 
-    public void subscribe() {
+    public void subscribe(String profileName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         try {
-            subscribeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button._5f5mN.jIbKX._6VtSN.yZn4P")));
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//h2"), profileName));
+        }
+        catch (TimeoutException e) {
+            Assert.fail("Failed to load profile page");
+        }
+        try {
+            subscribeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(div, \"%s\")]".formatted(Lang.SUBSCRIBE_RU))));
         }
         catch (TimeoutException e) {
             Assert.fail("You are already subscribed");
@@ -45,7 +52,7 @@ public class InstagramProfilePage {
     public void verifySubscription() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         try {
-            subscribedButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button._5f5mN.-fzfL._6VtSN.yZn4P")));
+            subscribedButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@aria-label, \"%s\")]".formatted(Lang.SUBSCRIBED_RU))));
         }
         catch (TimeoutException e) {
             Assert.fail("Subscription failed");
@@ -56,13 +63,13 @@ public class InstagramProfilePage {
     public void clickOnFirstPost(String profileName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         try {
-            wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("#react-root > section > main > div > header > section > div.XBGH5 > h2"), profileName));
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//h2"), profileName));
         }
         catch (TimeoutException e) {
             Assert.fail("Couldn't load profile page");
         }
         try {
-            firstPost = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#react-root > section > main > div > div._2z6nI > article > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1)")));
+            firstPost = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("_aagw")));
         }
         catch (TimeoutException e) {
             Assert.fail("Couldn't find first post");

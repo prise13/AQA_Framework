@@ -15,7 +15,6 @@ public class InstagramLikeTest {
     private Object[][] likeTestDP() {
         return new Object[][] {
                 {"zelenskiy_official"},
-                {"rterdogan"},
                 {"_sh.mel_"},
                 {"informationpersonal"}
         };
@@ -24,6 +23,7 @@ public class InstagramLikeTest {
     @BeforeClass
     public void initAndLogin() {
         BrowserFactory.initDriver(BrowserFactory.Browsers.CHROME);
+        BrowserFactory.setFullScreen();
         this.instagramBO = new InstagramBO(BrowserFactory.getDriver());
         instagramBO
                 .openLoginPage()
@@ -38,7 +38,6 @@ public class InstagramLikeTest {
                 .clickOnFirstProfile()
                 .clickOnFirstPost()
                 .like()
-                .verifyLike()
                 .closePost();
     }
 
