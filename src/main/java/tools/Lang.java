@@ -40,5 +40,15 @@ public enum Lang {
         public String toString() {
             return "Опубликовать";
         }
+    },
+    MESSAGE_RU {
+        public String toString() {
+            return "Отправить сообщение";
+        }
+    },
+    MESSAGE_UA {
+        public String toString() {
+            return "Повідомлення";
+        }
     }
 }

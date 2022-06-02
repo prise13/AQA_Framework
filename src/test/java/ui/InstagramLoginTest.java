@@ -21,6 +21,7 @@ public class InstagramLoginTest {
     @BeforeClass
     public void initDriver() {
         BrowserFactory.initDriver(BrowserFactory.Browsers.CHROME);
+        BrowserFactory.setFullScreen();
         this.instagramBO = new InstagramBO(BrowserFactory.getDriver());
     }
 

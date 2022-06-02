@@ -28,16 +28,16 @@ public class InstagramMessagePage {
     public void sendMessage(String message) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         try {
-            messageInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#react-root > section > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5._4EzTm > div > div > div.DPiy6.qF0y9.Igw0E.IwRSH.eGOV_.acqo5.vwCYk > div.uueGX > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5._4EzTm > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5.vwCYk.ItkAi > textarea")));
+            messageInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[contains(@placeholder, \"Напишите сообщение\")]")));
         }
         catch (TimeoutException e) {
             Assert.fail("Couldnt load message page");
         }
         messageInput.click();
-        messageInput = driver.findElement(By.cssSelector("#react-root > section > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5._4EzTm > div > div > div.DPiy6.qF0y9.Igw0E.IwRSH.eGOV_.acqo5.vwCYk > div.uueGX > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5._4EzTm > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5.vwCYk.ItkAi > textarea"));
+        messageInput = driver.findElement(By.xpath("//textarea[contains(@placeholder, \"Напишите сообщение\")]"));
         messageInput.sendKeys(message);
         try {
-            sendButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#react-root > section > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5._4EzTm > div > div > div.DPiy6.qF0y9.Igw0E.IwRSH.eGOV_.acqo5.vwCYk > div.uueGX > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5._4EzTm > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5._4EzTm.JI_ht > button")));
+            sendButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), \"Отправить\")]")));
         }
         catch (TimeoutException e) {
             Assert.fail("Couldn't send message");
@@ -48,11 +48,16 @@ public class InstagramMessagePage {
     public void acceptShitModal() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         try {
-            acceptShitButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > div.RnEpo.Yx5HN > div > div > div > div.mt3GC > button.aOOlW.HoLwm")));
+            acceptShitButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(), \"Не сейчас\")]")));
         }
         catch (TimeoutException e) {
-            System.out.println("clicked shit button");
+            System.out.println("Skipped modal");
         }
-        acceptShitButton.click();
+        try {
+            acceptShitButton.click();
+        }
+        catch (Exception e) {
+            System.out.println("Modal didn't appear");
+        }
     }
 }

@@ -16,6 +16,7 @@ public class InstagramSubscribeTest {
         return new Object[][] {
                 {"zelenskiy_official"},
                 {"_sh.mel_"},
+                {"rterdogan"},
                 {"informationpersonal"}
         };
     }

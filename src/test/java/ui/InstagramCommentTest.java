@@ -24,6 +24,7 @@ public class InstagramCommentTest {
     @BeforeClass
     public void init() {
         BrowserFactory.initDriver(BrowserFactory.Browsers.CHROME);
+        BrowserFactory.setFullScreen();
         this.instagramBO = new InstagramBO(BrowserFactory.getDriver());
         instagramBO
                 .openLoginPage()

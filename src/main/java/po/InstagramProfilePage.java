@@ -80,7 +80,7 @@ public class InstagramProfilePage {
     public void clickSendMessageButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
         try {
-            sendMessageButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#react-root > section > main > div > header > section > div.XBGH5 > div.qF0y9.Igw0E.IwRSH.eGOV_.ybXk5._4EzTm.bPdm3 > div > div.qF0y9.Igw0E.IwRSH.eGOV_.acqo5.vwCYk.soMvl.i0EQd > button")));
+            sendMessageButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), \"%s\")]/..".formatted(Lang.MESSAGE_RU))));
         }
         catch (TimeoutException e) {
             Assert.fail("Couldn't press button");
