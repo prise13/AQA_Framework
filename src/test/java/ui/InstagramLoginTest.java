@@ -14,10 +14,7 @@ public class InstagramLoginTest {
 
     @DataProvider
     public Object[][] instagramLoginDP() {
-        // return HibernateService.getLoginTestData();
-        return new Object[][] {
-                {"aqatest12", "AQAAuthenticationTest"}
-        };
+        return HibernateService.getLoginTestData();
     }
 
 
