@@ -48,8 +48,7 @@ public class InstagramPostPage {
             wait.until(ExpectedConditions.attributeToBe(likeButton, "aria-label", "Не подобається"));
         }
         catch (TimeoutException e) {
-            System.out.println(driver.findElements(By.className("_ab6-")).get(0).getAttribute("aria-label"));
-            // Assert.fail("Post is already liked");
+            Assert.fail("Post is already liked");
         }
         Assert.assertTrue(true);
     }

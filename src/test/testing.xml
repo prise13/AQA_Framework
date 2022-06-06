@@ -1,11 +1,11 @@
 <suite name="Suite1" verbose="1" >
-    <test name="Test" parallel="classes" thread-count="5">
+    <test name="Test" parallel="classes" thread-count="3">
         <classes>
             <class name="ui.InstagramLoginTest" />
-            <class name="ui.InstagramSubscribeTest" />
-<!--            <class name="ui.InstagramLikeTest"/>-->
+            <class name="ui.InstagramLikeTest"/>
 <!--            <class name="ui.InstagramCommentTest"/>-->
 <!--            <class name="ui.InstagramMessageTest"/>-->
+            <class name="ui.InstagramCommentTest"/>
         </classes>
     </test>
 </suite>
