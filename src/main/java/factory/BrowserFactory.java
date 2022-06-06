@@ -3,7 +3,9 @@ package factory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class BrowserFactory {
 
@@ -34,11 +36,15 @@ public class BrowserFactory {
         switch (browsers) {
             case CHROME -> {
                 WebDriverManager.chromedriver().setup();
-                DRIVER.set(new ChromeDriver());
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless");
+                DRIVER.set(new ChromeDriver(options));
             }
             case FIREFOX -> {
                 WebDriverManager.firefoxdriver().setup();
-                DRIVER.set(new FirefoxDriver());
+                FirefoxOptions options = new FirefoxOptions();
+                options.addArguments("--headless");
+                DRIVER.set(new FirefoxDriver(options));
             }
             default -> throw new RuntimeException("Wrong driver name, currently supported are 'chrome' and 'edge' drivers!");
         }
