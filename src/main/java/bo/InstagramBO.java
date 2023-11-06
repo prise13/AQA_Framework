@@ -28,7 +28,7 @@ public class InstagramBO {
         instagramLoginPage.openLoginPage();
         return this;
     }
-    public InstagramBO login(String login, String password) {
+    public InstagramBO login(String login, String password) throws Exception {
         instagramLoginPage.login(login, password);
         return this;
     }

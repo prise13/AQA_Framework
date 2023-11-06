@@ -19,13 +19,10 @@ import java.sql.Time;
 import java.time.Duration;
 import java.util.List;
 
-public class InstagramMainPage {
-
-    private final WebDriver driver;
+public class InstagramMainPage extends BasePage {
 
     public InstagramMainPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new InstagramFieldDecorator(driver), this);
+        super(driver);
     }
 
     @FindBy(xpath = "//*[@id=\"react-root\"]/section/nav/div[2]/div/div/div[3]/div/div[6]")
@@ -52,7 +49,7 @@ public class InstagramMainPage {
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"react-root\"]/section/nav/div[2]/div/div/div[3]/div/div[6]")));
         }
         catch (TimeoutException e) {
-            Assert.fail("Failed to login"); 
+            Assert.fail("Failed to login");
         }
         Assert.assertTrue(profileButton.isActive());
     }
@@ -80,7 +77,7 @@ public class InstagramMainPage {
     }
 
     // fills search input with specified profile name
-    public void     searchProfile(String profileName) {
+    public void searchProfile(String profileName) {
         WebDriverWait searchInputWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         try {
             WebElement element = searchInputWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@aria-label, \"%s\")]".formatted(Lang.SEARCH_RU))));

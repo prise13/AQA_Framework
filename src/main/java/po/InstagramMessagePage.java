@@ -1,19 +1,19 @@
 package po;
 
+import decorator.InstagramFieldDecorator;
 import factory.BrowserFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
 
-public class InstagramMessagePage {
-
-    private final WebDriver driver;
+public class InstagramMessagePage extends BasePage {
 
     private WebElement messageInput;
 
@@ -22,7 +22,7 @@ public class InstagramMessagePage {
     private WebElement acceptShitButton;
 
     public InstagramMessagePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void sendMessage(String message) {

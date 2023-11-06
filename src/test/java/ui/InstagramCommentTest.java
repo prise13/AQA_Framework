@@ -1,12 +1,13 @@
 package ui;
 
+import base.BaseTest;
 import bo.InstagramBO;
 import factory.BrowserFactory;
 import listener.AllureListener;
 import org.testng.annotations.*;
 
 @Listeners({AllureListener.class})
-public class InstagramCommentTest {
+public class InstagramCommentTest extends BaseTest {
 
     private InstagramBO instagramBO;
 
@@ -22,9 +23,7 @@ public class InstagramCommentTest {
     }
 
     @BeforeClass
-    public void init() {
-        BrowserFactory.initDriver(BrowserFactory.Browsers.CHROME);
-        BrowserFactory.setFullScreen();
+    public void init() throws Exception {
         this.instagramBO = new InstagramBO(BrowserFactory.getDriver());
         instagramBO
                 .openLoginPage()

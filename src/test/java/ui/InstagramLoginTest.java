@@ -1,5 +1,6 @@
 package ui;
 
+import base.BaseTest;
 import bo.InstagramBO;
 import factory.BrowserFactory;
 import hibernate.HibernateService;
@@ -7,35 +8,18 @@ import listener.AllureListener;
 import org.testng.annotations.*;
 
 @Listeners({AllureListener.class})
-public class InstagramLoginTest {
+public class InstagramLoginTest extends BaseTest {
 
-    private InstagramBO instagramBO;
+//    @DataProvider
+//    public Object[][] instagramLoginDP() {
+//        return HibernateService.getLoginTestData();
+//    }
 
-
-    @DataProvider
-    public Object[][] instagramLoginDP() {
-        return HibernateService.getLoginTestData();
-    }
-
-
-    @BeforeClass
-    public void initDriver() {
-        BrowserFactory.initDriver(BrowserFactory.Browsers.CHROME);
-        BrowserFactory.setFullScreen();
-        this.instagramBO = new InstagramBO(BrowserFactory.getDriver());
-    }
-
-
-    @Test(dataProvider = "instagramLoginDP")
-    public void loginTest(String login, String password) {
+    @Test()
+    public void loginTest() throws Exception {
         instagramBO
                 .openLoginPage()
-                .login(login, password)
+                .login("aqatest12", "123")
                 .verifyMainPage();
-    }
-
-    @AfterClass
-    public void closeBrowser() {
-        BrowserFactory.closeDriver();
     }
 }

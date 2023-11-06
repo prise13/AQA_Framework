@@ -1,0 +1,1 @@
+{"uuid":"44789d61-18cf-45c8-a865-815ebd55c23d","name":"ui.InstagramLoginTest","children":["b10039db-09d9-497f-8112-88711502cf72"],"befores":[{"name":"initDriver","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1699251664577,"stop":1699251664622}],"afters":[],"start":1699251664537,"stop":1699251667856}

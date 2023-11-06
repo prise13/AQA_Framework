@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import tools.Environment;
 
 public class BrowserFactory {
 
@@ -18,35 +19,32 @@ public class BrowserFactory {
         return DRIVER.get();
     }
 
-    public enum Browsers {
-        CHROME {
-            public String toString() {
-                return "chrome";
-            }
-        },
-        FIREFOX {
-            public String toString() {
-                return "firefox";
-            }
-        }
-    }
+//    public enum Browsers {
+//        CHROME {
+//            public String toString() {
+//                return "chrome";
+//            }
+//        },
+//        FIREFOX {
+//            public String toString() {
+//                return "firefox";
+//            }
+//        }
+//    }
 
 
-    public static void initDriver(Browsers browsers) {
-        switch (browsers) {
-            case CHROME -> {
+    public static void initDriver() throws Exception {
+        String browser = Environment.getProperty("test.browser");
+        switch (browser) {
+            case "chrome" -> {
                 WebDriverManager.chromedriver().setup();
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless");
-                DRIVER.set(new ChromeDriver(options));
+                DRIVER.set(new ChromeDriver());
             }
-            case FIREFOX -> {
+            case "firefox" -> {
                 WebDriverManager.firefoxdriver().setup();
-                FirefoxOptions options = new FirefoxOptions();
-                options.addArguments("--headless");
-                DRIVER.set(new FirefoxDriver(options));
+                DRIVER.set(new FirefoxDriver());
             }
-            default -> throw new RuntimeException("Wrong driver name, currently supported are 'chrome' and 'edge' drivers!");
+            default -> throw new RuntimeException("Wrong driver name, currently supported are 'chrome' and 'firefox' drivers!");
         }
     }
 

@@ -14,8 +14,7 @@ import tools.Lang;
 
 import java.time.Duration;
 
-public class InstagramProfilePage {
-
+public class InstagramProfilePage extends BasePage {
 
     WebElement subscribeButton;
 
@@ -25,11 +24,9 @@ public class InstagramProfilePage {
 
     WebElement sendMessageButton;
 
-    private WebDriver driver;
 
     public InstagramProfilePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new InstagramFieldDecorator(driver), this);
+        super(driver);
     }
 
     public void subscribe(String profileName) {

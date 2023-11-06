@@ -1,5 +1,6 @@
 package ui;
 
+import base.BaseTest;
 import bo.InstagramBO;
 import factory.BrowserFactory;
 import listener.AllureListener;
@@ -7,7 +8,7 @@ import org.openqa.selenium.remote.Browser;
 import org.testng.annotations.*;
 
 @Listeners({AllureListener.class})
-public class InstagramMessageTest {
+public class InstagramMessageTest extends BaseTest {
     private InstagramBO instagramBO;
 
 
@@ -20,9 +21,7 @@ public class InstagramMessageTest {
     }
 
     @BeforeClass
-    public void init() {
-        BrowserFactory.initDriver(BrowserFactory.Browsers.CHROME);
-        BrowserFactory.setFullScreen();
+    public void init() throws Exception {
         instagramBO = new InstagramBO(BrowserFactory.getDriver());
         instagramBO
                 .openLoginPage()

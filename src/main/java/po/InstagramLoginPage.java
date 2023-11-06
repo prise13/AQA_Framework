@@ -16,22 +16,23 @@ import org.testng.Assert;
 
 import java.time.Duration;
 
-public class InstagramLoginPage {
+public class InstagramLoginPage extends BasePage{
 
-    private final WebDriver driver;
 
-    @FindBy(xpath = "//*[@id=\"loginForm\"]/div/div[1]/div/label/input")
+    //*[@id="loginForm"]/div/div[1]/div/label/input
+    @FindBy(xpath = "//*[@id=\"loginForm\"]/descendant::input[@name='username']")
     private Input loginInput;
 
-    @FindBy(xpath = "//*[@id=\"loginForm\"]/div/div[2]/div/label/input")
+    //*[@id="loginForm"]/div/div[2]/div/label/input
+    @FindBy(xpath = "//*[@id=\"loginForm\"]/descendant::input[@name='password']")
     private Input passwordInput;
 
-    @FindBy(xpath = "//*[@id=\"loginForm\"]/div/div[3]/button")
+    //*[@id="loginForm"]/div/div[3]/button
+    @FindBy(xpath = "//form[@id=\"loginForm\"]/descendant::button[@type='submit']")
     private Button submitButton;
 
     public InstagramLoginPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new InstagramFieldDecorator(driver), this);
+        super(driver);
     }
 
     // Navigates to instagram's login page
@@ -40,14 +41,8 @@ public class InstagramLoginPage {
     }
 
     // fills inputs with specified data and presses submit button
-    public void login(String login, String password) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        try {
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"loginForm\"]/div/div[3]/button")));
-        }
-        catch (TimeoutException e) {
-            Assert.fail("Login to load login page");
-        }
+    public void login(String login, String password) throws Exception {
+        submitButton.waitForMe();
         loginInput.fillWith(login);
         passwordInput.fillWith(password);
         if (submitButton.isActive()) {
