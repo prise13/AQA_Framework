@@ -11,6 +11,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class TrelloHTTPClient {
     private final String API_KEY;
@@ -56,9 +57,10 @@ public class TrelloHTTPClient {
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody, StandardCharsets.UTF_8))
                 .build();
 
-        HttpClient client = HttpClient.newHttpClient();
+        try (HttpClient client = HttpClient.newHttpClient()) {
+            return client.send(request, HttpResponse.BodyHandlers.ofString());
+        }
 
-        return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
     public HttpResponse<String> createBoardList(String idBoard, String name) throws URISyntaxException, IOException, InterruptedException {
