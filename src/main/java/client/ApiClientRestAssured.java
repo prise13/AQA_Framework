@@ -1,35 +1,31 @@
 package client;
 
 import constants.Constants;
-import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import service.AuthService;
 
 import static io.restassured.RestAssured.given;
 
 public class ApiClientRestAssured {
 
-    private final RequestSpecification specification;
+    private final AuthService authService = AuthService.getInstance();
 
-    public ApiClientRestAssured() {
-        specification = new RequestSpecBuilder()
-                .setBaseUri(Constants.BASE_URL)
-                .setContentType(ContentType.JSON)
-                .addQueryParam("key", Constants.API_KEY)
-                .addQueryParam("token", Constants.API_TOKEN)
-                .build();
+    private RequestSpecification request() {
+        return given()
+                .baseUri(Constants.BASE_URL)
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + authService.getToken());
     }
 
     public Response sendGet(String endpoint) {
-        return given()
-                .spec(specification)
+        return request()
                 .get(endpoint);
     }
 
     public Response sendPost(String endpoint, Object body) {
-        return given()
-                .spec(specification)
+        return request()
                 .body(body)
                 .post(endpoint);
     }
