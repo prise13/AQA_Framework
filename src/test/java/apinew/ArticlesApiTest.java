@@ -21,10 +21,11 @@ public class ArticlesApiTest {
         CreateArticleResponse createdArticle = articleApi.createArticle(createArticleRequest);
         // Check that response contains correct fields
         AssertionHelper.assertArticle(createdArticle.getArticle(), createArticleRequest.getArticle());
-        // Get article by slug and check fields again, check that article from created is the same as in loaded
+        // Get article by slug and check that article from created is the same as in loaded
         CreateArticleResponse loadedArticle = articleApi.getArticleBySlug(createdArticle.getArticle().getSlug());
-        AssertionHelper.assertArticle(loadedArticle.getArticle(), createArticleRequest.getArticle());
-        AssertionHelper.assertSameArticle(loadedArticle.getArticle(), createdArticle.getArticle());
+        assertThat(loadedArticle.getArticle())
+                .usingRecursiveComparison()
+                .isEqualTo(createdArticle.getArticle());
     }
 
     public void shouldNotCreateArticleWithoutTitle() {
