@@ -21,4 +21,17 @@ public class ArticleApi {
         }
         return response.as(CreateArticleResponse.class);
     }
+
+    public Response createArticleRaw(CreateArticleRequest createArticleRequest) {
+        return apiClient.sendPost(ENDPOINT, createArticleRequest);
+    }
+
+    public CreateArticleResponse getArticleBySlug(String slug) {
+        Response response = apiClient.sendGet(ENDPOINT + "/" + slug);
+
+        if (response.statusCode() != 200) {
+            throw new ApiException("Failed to get the article. Expected status is 200, but got " + response.statusCode() + " Response body: " + response.asPrettyString());
+        }
+        return response.as(CreateArticleResponse.class);
+    }
 }
