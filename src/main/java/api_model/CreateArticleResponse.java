@@ -7,8 +7,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LoginRequest {
+public class CreateArticleResponse {
 
-    UserRequest user;
+    private ArticleResponse article;
 
 }

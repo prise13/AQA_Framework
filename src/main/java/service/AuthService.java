@@ -2,11 +2,12 @@ package service;
 
 import api_model.LoginRequest;
 import api_model.LoginResponse;
-import client.ApiClientRestAssured;
+import api_model.UserRequest;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import constants.Constants;
 import exception.ApiException;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 import java.util.Date;
@@ -15,7 +16,7 @@ import static io.restassured.RestAssured.given;
 
 public class AuthService {
 
-    private static final String LOGIN_ENDPOINT = "/login";
+    private static final String LOGIN_ENDPOINT = "/users/login";
 
     private String token;
 
@@ -37,16 +38,19 @@ public class AuthService {
     }
 
     private String login() {
-        LoginRequest loginRequest = LoginRequest.builder()
-                .username(Constants.LOGIN)
+        UserRequest userRequest = UserRequest.builder()
+                .email(Constants.EMAIL)
                 .password(Constants.PASSWORD)
                 .build();
-        Response response = given().baseUri(Constants.BASE_URL).body(loginRequest).post(LOGIN_ENDPOINT);
+        LoginRequest loginRequest = LoginRequest.builder()
+                .user(userRequest)
+                .build();
+        Response response = given().contentType(ContentType.JSON).baseUri(Constants.BASE_URL).body(loginRequest).post(LOGIN_ENDPOINT);
         if (response.statusCode() != 200) {
             throw new ApiException("Failed to get JWT, received status code " + response.statusCode() + " and body " + response.asPrettyString());
         }
         LoginResponse loginResponse = response.as(LoginResponse.class);
-        return loginResponse.getJwt();
+        return loginResponse.getUser().getToken();
     }
 
     private boolean isExpired(String token) {

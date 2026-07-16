@@ -2,13 +2,15 @@ package api_model;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LoginRequest {
+public class CreateArticleRequest {
 
-    UserRequest user;
+    private ArticleRequest article;
 
 }

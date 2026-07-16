@@ -42,7 +42,7 @@ public class TrelloHTTPClient {
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    public HttpResponse<String> createBoard(String idOrganization,String name, String desc) throws URISyntaxException, IOException, InterruptedException {
+    public HttpResponse<String> createBoard(String idOrganization, String name, String desc) throws URISyntaxException, IOException, InterruptedException {
         String requestBody = String.format("""
                 {
                     "key":"%s",
@@ -57,9 +57,8 @@ public class TrelloHTTPClient {
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody, StandardCharsets.UTF_8))
                 .build();
 
-        try (HttpClient client = HttpClient.newHttpClient()) {
-            return client.send(request, HttpResponse.BodyHandlers.ofString());
-        }
+        HttpClient client = HttpClient.newHttpClient();
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
 
     }
 

@@ -1,5 +1,6 @@
 package api_model;
 
+
 import lombok.*;
 
 @Getter
@@ -7,8 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LoginRequest {
-
-    UserRequest user;
-
+public class Tags {
+    private String tagName;
 }
