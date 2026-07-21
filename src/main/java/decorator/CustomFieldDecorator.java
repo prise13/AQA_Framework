@@ -8,9 +8,9 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.lang.reflect.Field;
 
-public class InstagramFieldDecorator extends DefaultFieldDecorator {
+public class CustomFieldDecorator extends DefaultFieldDecorator {
 
-    public InstagramFieldDecorator(SearchContext context) {
+    public CustomFieldDecorator(SearchContext context) {
         super(new DefaultElementLocatorFactory(context));
     }
 

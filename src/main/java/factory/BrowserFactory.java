@@ -19,39 +19,25 @@ public class BrowserFactory {
         return DRIVER.get();
     }
 
-//    public enum Browsers {
-//        CHROME {
-//            public String toString() {
-//                return "chrome";
-//            }
-//        },
-//        FIREFOX {
-//            public String toString() {
-//                return "firefox";
-//            }
-//        }
-//    }
-
 
     public static void initDriver() throws Exception {
         String browser = Environment.getProperty("test.browser");
         switch (browser) {
             case "chrome" -> {
                 WebDriverManager.chromedriver().setup();
-                DRIVER.set(new ChromeDriver());
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--start-maximized");
+                DRIVER.set(new ChromeDriver(chromeOptions));
             }
             case "firefox" -> {
                 WebDriverManager.firefoxdriver().setup();
-                DRIVER.set(new FirefoxDriver());
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addArguments("--start-maximized");
+                DRIVER.set(new FirefoxDriver(firefoxOptions));
             }
             default -> throw new RuntimeException("Wrong driver name, currently supported are 'chrome' and 'firefox' drivers!");
         }
     }
-
-    public static void setFullScreen() {
-        DRIVER.get().manage().window().maximize();
-    }
-
 
     public static void closeDriver() {
         DRIVER.get().quit();

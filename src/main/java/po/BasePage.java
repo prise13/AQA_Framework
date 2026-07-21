@@ -1,16 +1,17 @@
 package po;
 
-import decorator.InstagramFieldDecorator;
+import decorator.CustomFieldDecorator;
+import factory.BrowserFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class BasePage {
+public abstract class BasePage {
 
-    protected WebDriver driver;
+    protected final WebDriver driver;
 
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new InstagramFieldDecorator(driver), this);
+    protected BasePage() {
+        this.driver = BrowserFactory.getDriver();
+        PageFactory.initElements(new CustomFieldDecorator(driver), this);
     }
 
 }

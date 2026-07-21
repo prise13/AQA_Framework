@@ -2,19 +2,9 @@ package po;
 
 import decorator.Button;
 import decorator.Input;
-import decorator.InstagramFieldDecorator;
-import factory.BrowserFactory;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.time.Duration;
 
 public class InstagramLoginPage extends BasePage{
 
@@ -32,7 +22,7 @@ public class InstagramLoginPage extends BasePage{
     private Button submitButton;
 
     public InstagramLoginPage(WebDriver driver) {
-        super(driver);
+        super();
     }
 
     // Navigates to instagram's login page
@@ -42,7 +32,7 @@ public class InstagramLoginPage extends BasePage{
 
     // fills inputs with specified data and presses submit button
     public void login(String login, String password) throws Exception {
-        submitButton.waitForMe();
+        submitButton.waitUntilVisible();
         loginInput.fillWith(login);
         passwordInput.fillWith(password);
         if (submitButton.isActive()) {

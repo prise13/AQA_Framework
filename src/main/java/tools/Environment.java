@@ -18,14 +18,22 @@ public class Environment {
         }
     }
 
-    public static String getProperty(String property) throws Exception {
+    public static String getProperty(String property) {
         if (properties == null) {
-            initProperties();
+            try {
+                initProperties();
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to initialize properties", e);
+            }
         }
-        String prop = properties.get(property).toString();
-        if (prop == null) {
-            throw new Exception("Property not found");
+
+        String value = properties.getProperty(property);
+
+        if (value == null) {
+            throw new IllegalArgumentException(
+                    "Property '" + property + "' not found");
         }
-        return prop;
+
+        return value;
     }
 }

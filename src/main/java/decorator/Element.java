@@ -15,19 +15,18 @@ public class Element {
 
     protected WebElement element;
 
-    public Element(WebElement element) throws Exception {
+    public Element(WebElement element) {
         this.element = element;
     }
 
-    public void waitForMe() throws Exception {
+    public void waitUntilVisible() {
         int timeout = Integer.parseInt(Environment.getProperty("test.waitTimeout"));
-        WebDriverWait wait = new WebDriverWait(BrowserFactory.getDriver(), Duration.ofSeconds(timeout));
-        try {
-            wait.until(ExpectedConditions.visibilityOf(element));
-        }
-        catch (TimeoutException e) {
-            Assert.fail("Visibility timeout");
-        }
+
+        WebDriverWait wait = new WebDriverWait(
+                BrowserFactory.getDriver(),
+                Duration.ofSeconds(timeout));
+
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
 }

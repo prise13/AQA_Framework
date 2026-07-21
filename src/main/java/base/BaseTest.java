@@ -1,23 +1,18 @@
 package base;
 
-import bo.InstagramBO;
 import factory.BrowserFactory;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
-public class BaseTest {
+public abstract class BaseTest {
 
-    protected InstagramBO instagramBO;
-
-    @BeforeSuite
-    public void beforeSuite() throws Exception {
+    @BeforeMethod
+    public void setUp() throws Exception {
         BrowserFactory.initDriver();
-        BrowserFactory.setFullScreen();
-        instagramBO = new InstagramBO(BrowserFactory.getDriver());
     }
 
-    @AfterSuite
-    public void afterSuite() {
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() {
         BrowserFactory.closeDriver();
     }
 
