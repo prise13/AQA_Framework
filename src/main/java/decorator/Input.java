@@ -14,9 +14,7 @@ public class Input extends Element{
     public void fillWith(String value) {
         System.out.println("fill with " + value);
         element.clear();
-        if (element.getAttribute("value").equals("")) {
-        }
-        else {
+        if (!element.getAttribute("value").isEmpty()) {
             element.clear();
         }
         element.sendKeys(value);

@@ -14,4 +14,5 @@ public abstract class BasePage {
         PageFactory.initElements(new CustomFieldDecorator(driver), this);
     }
 
+    protected abstract BasePage waitUntilOpened();
 }

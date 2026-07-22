@@ -1,6 +1,5 @@
 package po;
 
-import constants.Routes;
 import decorator.Button;
 import decorator.Input;
 import org.openqa.selenium.support.FindBy;
@@ -14,13 +13,13 @@ public class MantisPasswordPage extends BasePage {
     private Button loginButton;
 
     public MantisMyViewPage submitPassword(String password) {
-        waitUntilOpened();
         passwordInput.fillWith(password);
         loginButton.press();
-        return new MantisMyViewPage();
+        return new MantisMyViewPage().waitUntilOpened();
     }
 
-    public MantisPasswordPage waitUntilOpened() {
+    @Override
+    protected MantisPasswordPage waitUntilOpened() {
         passwordInput.waitUntilVisible();
         return this;
     }

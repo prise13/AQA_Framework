@@ -16,18 +16,19 @@ public class MantisLoginPage extends BasePage {
 
     public MantisLoginPage open() {
         driver.get(Routes.LOGIN);
-        waitUntilOpened();
-        return this;
+        return waitUntilOpened();
     }
 
     public MantisPasswordPage submitUsername(String username) {
         usernameInput.fillWith(username);
         loginButton.press();
-        return new MantisPasswordPage();
+        return new MantisPasswordPage().waitUntilOpened();
     }
 
-    public void waitUntilOpened() {
+    @Override
+    protected MantisLoginPage waitUntilOpened() {
         usernameInput.waitUntilVisible();
+        return this;
     }
 
 }
